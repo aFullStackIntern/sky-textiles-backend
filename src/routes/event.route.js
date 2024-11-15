@@ -8,16 +8,16 @@ import {
   blockEvents,
   UnblockEvents,
   updateImage,
+  getEventBySlug,
 } from "../controllers/event.controllers.js";
 import { verifyJwt } from "../middlewares/auth.middleware.js";
 
 const router = Router();
-
 router
   .route("/create")
   .post(upload.fields([{ name: "image", maxCount: 1 }]), createEvent);
-
 router.route("/get-all").get(getAllEvents);
+router.route("/get-by-slug/:slug").get(getEventBySlug);
 router.route("/block-event/:id").put(blockEvents);
 router.route("/unblock-event/:id").put(UnblockEvents);
 router.route("/update/:id").post(updateEvents);

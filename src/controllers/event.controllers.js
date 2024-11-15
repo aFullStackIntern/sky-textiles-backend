@@ -204,7 +204,24 @@ const updateImage = asyncHandler(async (req, res, next) => {
     .json(new ApiResponse(200, "Image updated successfully", updatedEvents));
 });
 
+const getEventBySlug = asyncHandler(async (req, res) => {
+  const { slug } = req.params; // You can also use req.query.pagename if you want to pass it as a query parameter.
+
+  if (!slug) {
+    throw new ApiError(400, "Slug is required!");
+  }
+
+  const event = await Events.findOne({ slug });
+
+  if (!event) {
+    throw new ApiError(404, "Event not found for the specified slug!");
+  }
+
+  res.status(200).json(new ApiResponse(200, "event found!", event));
+});
+
 export {
+  getEventBySlug,
   createEvent,
   getAllEvents,
   updateEvents,

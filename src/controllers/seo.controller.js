@@ -6,17 +6,18 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { validateMongoDbId } from "../utils/validateMongodbId.js";
 
 const createMetadata = asyncHandler(async (req, res) => {
+  console.log(req.body);
   const { title, description, keywords, pagename } = req.body;
   if (!title || !description || !keywords || !pagename) {
     throw new ApiError(400, "Plese fill all the required fileds!!!");
   }
-   const existing = await Metadata.findOne({ pagename });
-   if (existing) {
-     throw new ApiError(400, "This data has already been exist.");
-   }
+  const existing = await Metadata.findOne({ pagename });
+  if (existing) {
+    throw new ApiError(400, "This data has already been exist.");
+  }
   const Seo = await Metadata.create({
     title,
-    description, 
+    description,
     keywords,
     pagename,
   });
@@ -91,8 +92,6 @@ const updateMetadataById = asyncHandler(async (req, res) => {
       new ApiResponse(200, "Metadata updated successfully!", updatedMetadata)
     );
 });
-
-
 
 export {
   createMetadata,
