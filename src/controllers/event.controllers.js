@@ -135,7 +135,6 @@ const updateEvents = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const { title, content, slug } = req.body;
 
-  console.log("id: ", id);
   // Validate MongoDB ID
   validateMongoDbId(id);
 

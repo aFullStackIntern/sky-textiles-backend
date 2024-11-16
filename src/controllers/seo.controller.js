@@ -6,7 +6,6 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { validateMongoDbId } from "../utils/validateMongodbId.js";
 
 const createMetadata = asyncHandler(async (req, res) => {
-  console.log(req.body);
   const { title, description, keywords, pagename } = req.body;
   if (!title || !description || !keywords || !pagename) {
     throw new ApiError(400, "Plese fill all the required fileds!!!");
